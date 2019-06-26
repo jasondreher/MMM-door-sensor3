@@ -22,19 +22,25 @@ modules: [
 
 
 
-I set up the below in HomeAssistant to trigger in syslog
+I set up the below in HomeAssistant to trigger in syslog (https://github.com/paviro/MMM-syslog)
 ````
    washericon:
-      command_on: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Washer_Running&silent=true"'
-      command_off: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Washer_Empty&silent=true"'      
+      command_on: 'curl "http://MirrorIP:8080/syslog?type=INFO&message=Washer_Running&silent=true"'
+      command_off: 'curl "http://MirrorIP:8080/syslog?type=INFO&message=Washer_Empty&silent=true"'      
     dryericon:
-      command_on: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Dryer_Running&silent=true"'
-      command_off: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Dryer_Empty&silent=true"'       
+      command_on: 'curl "http://MirrorIP:8080/syslog?type=INFO&message=Dryer_Running&silent=true"'
+      command_off: 'curl "http://MirrorIP:8080/syslog?type=INFO&message=Dryer_Empty&silent=true"'       
     washerdoneicon:
-      command_on: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Washer_Done&silent=true"'
-      command_off: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Washer_Empty&silent=true"'      
+      command_on: 'curl "http://MirrorIP:8080/syslog?type=INFO&message=Washer_Done&silent=true"'
+      command_off: 'curl "http://MirrorIP:8080/syslog?type=INFO&message=Washer_Empty&silent=true"'      
     dryerdoneicon:
-      command_on: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Dryer_Done&silent=true"'
-      command_off: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Dryer_Empty&silent=true"'
+      command_on: 'curl "http://MirrorIP:8080/syslog?type=INFO&message=Dryer_Done&silent=true"'
+      command_off: 'curl "http://MirrorIP:8080/syslog?type=INFO&message=Dryer_Empty&silent=true"'
 ````
 
+I also modifed syslog, I believe this needs to be done to send a public message
+add lines 61 & 62 (after })
+			var datetime = 'NOW-' + new Date().getTime() //added by jason
+			this.sendNotification(payload.message,payload.type); //added by jason
+add line 127 (after return wrapper;)
+		this.sendNotification('syslog-End'); //added by jason
