@@ -1,0 +1,30 @@
+<pse>
+<creation-type>
+0</creation-type>
+<creation-tag>
+</creation-tag>
+<creation-theme>
+christmas</creation-theme>
+<print-format>
+pdf</print-format>
+<start-month>
+</start-month>
+<start-year>
+</start-year>
+<pagelist>
+<page>
+<relative_path>
+<![CDATA[
+download washer\download washer_01.psd]]>
+</relative_path>
+<absolute_path>
+<![CDATA[
+\\192.168.0.66\sambashare\MagicMirror\modules\MMM-door-sensor3\img\download washer\download washer_01.psd]]>
+</absolute_path>
+<resolution>
+72</resolution>
+</page>
+</pagelist>
+<version>
+3</version>
+</pse>
