@@ -1,37 +1,40 @@
-# MMM-syslog
-Notification API Module for MagicMirror<sup>2</sup>
+# Module: MMM-door-sensor
 
-## Example
 
-![](https://forum.magicmirror.builders/uploads/files/1473753516823-syslog-icon-4.jpg)
 
-## Dependencies
-  * An installation of [MagicMirror<sup>2</sup>](https://github.com/MichMich/MagicMirror)
+## Using the module
 
-## Installation
- 1. Clone this repo into `~/MagicMirror/modules` directory.
- 2. Configure your `~/MagicMirror/config/config.js`:
+Logic from https://github.com/istepgueu/MMM-door-sensor
 
-    ```
-    {
-        module: 'MMM-syslog',
-        position: 'top_right',
-        config: {
-            ...
-        }
-    }
-    ```
+To use this module, add it to the modules array in the `config/config.js` file:
+````javascript
+modules: [
+	{
+		module: "MMM-door-sensor3",
+		position: "top_left",	// This can be any of the regions.
+		config: {
+			// See 'Configuration options' for more information.
+			
+		}
+	},
+]
+````
 
-## Config Options
-| **Option** | **Default** | **Description** |
-| --- | --- | --- |
-| `max` | `5` | How many messages should be displayed on the screen. |
-| `format` | `false` | Displays relative date format, for absolute date format provide a string like `'DD:MM HH:mm'` [All Options](http://momentjs.com/docs/#/displaying/format/) |
-| `types` | `{INFO: "dimmed", WARNING: "normal", ERROR: "bright"}` | Object with message types and their css class. |
-| `shortenMessage` | `false` | After how many characters the message should be cut. Default: show all. |
-| `alert` | `true` | Display notification? |
 
-## How to Use
-Make an http get request like:
-  http://MIRROR_IP:MIRROR_PORT/syslog?type=INFO&message=YOUR_MESSAGE&silent=true : no notification
+
+I set up the below in HomeAssistant to trigger in syslog
+````
+   washericon:
+      command_on: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Washer_Running&silent=true"'
+      command_off: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Washer_Empty&silent=true"'      
+    dryericon:
+      command_on: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Dryer_Running&silent=true"'
+      command_off: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Dryer_Empty&silent=true"'       
+    washerdoneicon:
+      command_on: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Washer_Done&silent=true"'
+      command_off: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Washer_Empty&silent=true"'      
+    dryerdoneicon:
+      command_on: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Dryer_Done&silent=true"'
+      command_off: 'curl "http://192.168.0.57:8080/syslog?type=INFO&message=Dryer_Empty&silent=true"'
+````
 
