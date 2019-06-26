@@ -39,8 +39,10 @@ I set up the below in HomeAssistant to trigger in syslog (https://github.com/pav
 ````
 
 I also modifed syslog, I believe this needs to be done to send a public message
+````
 add lines 61 & 62 (after })
 			var datetime = 'NOW-' + new Date().getTime() //added by jason
 			this.sendNotification(payload.message,payload.type); //added by jason
 add line 127 (after return wrapper;)
 		this.sendNotification('syslog-End'); //added by jason
+````
